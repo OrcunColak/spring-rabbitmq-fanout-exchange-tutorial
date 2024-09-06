@@ -20,13 +20,7 @@ public class NotificationController {
     @GetMapping("/sendMessage/{message}")
     public ResponseEntity<String> testRabbitmq(@PathVariable String message) {
         // Send email notification
-        notificationProducer.sendEmailNotification("New order placed.");
-
-        // Send SMS notification
-        notificationProducer.sendSMSNotification("Payment successful.");
-
-        // Store log message
-        notificationProducer.sendLogToStorage("Application error occurred.");
+        notificationProducer.sendNotification("12345");
 
         return ResponseEntity.status(HttpStatus.OK).body("Success");
     }

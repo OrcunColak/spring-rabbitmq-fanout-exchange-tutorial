@@ -34,7 +34,7 @@ class RabbitMQProducerIT {
     // This test captures the log output of the consumer
     @Test
     void testSendMessage(CapturedOutput output) {
-        assertThatCode(() -> notificationProducer.sendEmailNotification("12345")).doesNotThrowAnyException();
+        assertThatCode(() -> notificationProducer.sendNotification("12345")).doesNotThrowAnyException();
         await().atMost(10, TimeUnit.SECONDS)
                 .until(isMessageConsumed(output));
     }
@@ -42,9 +42,9 @@ class RabbitMQProducerIT {
     private Callable<Boolean> isMessageConsumed(CapturedOutput output) {
         return () -> {
             String out = output.getOut();
-            return out.contains("Email Notification: Email: 12345")
-                   && out.contains("SMS Notification: Email: 12345")
-                   && out.contains("Log Storage: Email: 12345");
+            return out.contains("Email Notification: 12345")
+                   && out.contains("SMS Notification: 12345")
+                   && out.contains("Log Storage: 12345");
         };
     }
 

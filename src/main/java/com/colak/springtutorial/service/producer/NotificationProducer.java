@@ -13,15 +13,8 @@ public class NotificationProducer {
 
     private final FanoutExchange notificationFanoutExchange;
 
-    public void sendEmailNotification(String message) {
-        rabbitTemplate.convertAndSend(notificationFanoutExchange.getName(), "", "Email: " + message);
+    public void sendNotification(String message) {
+        rabbitTemplate.convertAndSend(notificationFanoutExchange.getName(), "", message);
     }
 
-    public void sendSMSNotification(String message) {
-        rabbitTemplate.convertAndSend(notificationFanoutExchange.getName(), "", "SMS: " + message);
-    }
-
-    public void sendLogToStorage(String logMessage) {
-        rabbitTemplate.convertAndSend(notificationFanoutExchange.getName(), "", "Log: " + logMessage);
-    }
 }
