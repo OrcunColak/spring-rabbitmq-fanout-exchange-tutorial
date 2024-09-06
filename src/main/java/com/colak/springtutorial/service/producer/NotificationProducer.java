@@ -1,7 +1,7 @@
 package com.colak.springtutorial.service.producer;
 
+import com.colak.springtutorial.config.NotificationConfig;
 import lombok.RequiredArgsConstructor;
-import org.springframework.amqp.core.FanoutExchange;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 
@@ -11,10 +11,8 @@ public class NotificationProducer {
 
     private final RabbitTemplate rabbitTemplate;
 
-    private final FanoutExchange notificationFanoutExchange;
-
     public void sendNotification(String message) {
-        rabbitTemplate.convertAndSend(notificationFanoutExchange.getName(), "", message);
+        rabbitTemplate.convertAndSend(NotificationConfig.NOTIFICATION_FANOUT_EXCHANGE, "", message);
     }
 
 }
